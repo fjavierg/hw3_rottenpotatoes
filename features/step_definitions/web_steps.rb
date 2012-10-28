@@ -87,11 +87,17 @@ When /^(?:|I )select "([^"]*)" from "([^"]*)"$/ do |value, field|
 end
 
 When /^(?:|I )check "([^"]*)"$/ do |field|
-  check(field)
+  check('ratings_'+field)
+end
+
+Given /^(?:|I )check the following ratings:$/ do |fields|
+	fields.each do |field|
+		check('ratings_'+field)
+	end
 end
 
 When /^(?:|I )uncheck "([^"]*)"$/ do |field|
-  uncheck(field)
+  uncheck('ratings_'+field)
 end
 
 When /^(?:|I )choose "([^"]*)"$/ do |field|
@@ -108,6 +114,13 @@ Then /^(?:|I )should see "([^"]*)"$/ do |text|
   else
     assert page.has_content?(text)
   end
+end
+
+Then /^(?:|I )should see all of the movies$/ do
+	rows = page.all("table#movies tr").count
+
+    assert rows.should == 11, "Error"
+
 end
 
 Then /^(?:|I )should see \/([^\/]*)\/$/ do |regexp|
