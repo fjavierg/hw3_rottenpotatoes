@@ -15,6 +15,10 @@ module NavigationHelpers
 
     when /^the (RottenPotatoes )?home\s?page$/ then '/movies'
     when /^the movies page$/ then '/movies'
+	when /^the edit page for "Alien"$/ then '/movies/3/edit'
+	when /^the details page for "Alien"$/ then '/movies/3'
+	when /^the details page for "Star Wars"$/ then '/movies/1'
+	when /^the Similar Movies page for "Star Wars"$/ then '/movies/find/1'
 
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:

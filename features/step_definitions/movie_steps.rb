@@ -8,6 +8,7 @@ Given /the following movies exist/ do |movies_table|
 	tmp.title = movie['title']
 	tmp.release_date = movie['release_date']
 	tmp.rating = movie['rating']
+	tmp.director = movie['director']
 	tmp.save!
   end
 
@@ -37,3 +38,11 @@ When /I (un)?check the following ratings: (.*)/ do |uncheck, rating_list|
   #   iterate over the ratings and reuse the "When I check..." or
   #   "When I uncheck..." steps in lines 89-95 of web_steps.rb
 end
+
+Then /^the director of "(.*?)" should be "(.*?)"$/ do |arg1, arg2|
+  #movie = Movie.find(3)
+  movie = Movie.where("title = ?", arg1)
+  assert movie[0].director == arg2
+
+end
+
